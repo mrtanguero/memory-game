@@ -9,7 +9,7 @@
 }
 
 :root {
-  --card-size: 150px;
+  --card-size: 140px;
 }
 
 html {
@@ -26,7 +26,7 @@ h1 {
 }
 
 .game-container {
-  width: 645px;
+  width: 605px;
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
@@ -44,6 +44,12 @@ h1 {
   width: var(--card-size);
 
   border-radius: 5px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .card__side {
@@ -76,6 +82,9 @@ h1 {
   font-size: 2em;
   font-weight: bold;
 }
+.card__side--front:hover {
+  filter: brightness(1.2);
+}
 
 .card__side--back {
   background-color: rgb(255, 255, 255);
@@ -83,10 +92,9 @@ h1 {
   z-index: -1;
 }
 
-.card:hover {
-  cursor: pointer;
+/* .card:hover .card__side--front {
   filter: brightness(1.2);
-}
+} */
 
 .card.rotated .card__side--front {
   transform: rotateY(180deg);
@@ -104,7 +112,7 @@ img {
   object-fit: cover;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 660px) {
   .game-container {
     width: 90%;
     gap: 3%;

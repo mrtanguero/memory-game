@@ -27,7 +27,6 @@ function reactToMove(e) {
 
   if (state.movesPlayed === 2) {
     state.movesPlayed = 0;
-    console.log(state);
     if (card.dataset.value === state.currentMove[0].dataset.value) {
       state.cardsOpen.push(...state.currentMove);
       state.currentMove = [];
