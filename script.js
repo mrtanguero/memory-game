@@ -26,17 +26,12 @@ function reactToMove(e) {
   state.currentMove.push(card);
 
   if (state.movesPlayed === 2) {
-    // game.removeEventListener("click", reactToMove);
     state.movesPlayed = 0;
     console.log(state);
     if (card.dataset.value === state.currentMove[0].dataset.value) {
       state.cardsOpen.push(...state.currentMove);
       state.currentMove = [];
-      // TODO: dva igraca - state.score[state.player]++;
-      console.log(state.score);
-      // game.addEventListener("click", reactToMove);
     } else {
-      // TODO: dva igraca - state.player = state.player ? 0 : 1;
       timeout = setTimeout(resetMove, 1500);
     }
   }
@@ -46,13 +41,10 @@ function resetMove() {
   state.currentMove.forEach((card) => {
     card.classList.remove("rotated");
     state.currentMove = [];
-    // game.addEventListener("click", reactToMove);
   });
 }
 
 function init() {
-  state.player = 0;
-  state.score = [0, 0];
   state.movesPlayed = 0;
   state.randomArray = [];
   state.currentMove = [];
