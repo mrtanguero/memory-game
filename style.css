@@ -8,11 +8,6 @@
   box-sizing: inherit;
 }
 
-:root {
-  --front-angle: 0deg;
-  --back-angle: 180deg;
-}
-
 html {
   box-sizing: border-box;
 }
@@ -27,11 +22,12 @@ h1 {
 }
 
 .game-container {
+  width: 645px;
   display: grid;
-  grid-template-rows: repeat(4, 150px);
-  grid-template-columns: repeat(4, 150px);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
-  justify-content: center;
+  margin: 0 auto;
 }
 
 .card {
@@ -43,7 +39,6 @@ h1 {
   width: 150px;
 
   border-radius: 5px;
-  /* overflow: hidden; */
 }
 
 .card__side {
@@ -72,32 +67,36 @@ h1 {
     rgb(250, 109, 84),
     rgb(148, 26, 26)
   );
-  transform: rotateY(var(--front-angle));
+  /* transform: rotateY(0deg); */
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .card__side--back {
   background-color: rgb(255, 255, 255);
-  transform: rotateY(var(--back-angle));
+  transform: rotateY(180deg);
   z-index: -1;
 }
 
 .card:hover {
   cursor: pointer;
+  filter: brightness(1.2);
 }
 
-/* .card:hover .card__side--front {
-  transform: rotateY(180deg);
-}
-
-.card:hover .card__side--back {
-  transform: rotateY(360deg);
-} */
-
-.card__side--front.rotated {
+/* .card__side--front.rotated {
   transform: rotateY(180deg);
 }
 
 .card__side--back.rotated {
+  transform: rotateY(360deg);
+  overflow: hidden;
+} */
+
+.card.rotated .card__side--front {
+  transform: rotateY(180deg);
+}
+
+.card.rotated .card__side--back {
   transform: rotateY(360deg);
   overflow: hidden;
 }
@@ -106,5 +105,20 @@ img {
   height: 80%;
   width: auto;
   border-radius: 5px;
-  object-fit: contain;
+  object-fit: cover;
 }
+
+/* @media only screen and (max-width: 700px) {
+  .game-container {
+    margin: 0 3%;
+    width: 94%;
+    background-color: chartreuse;
+    justify-content: center;
+  }
+
+  .card,
+  .card__side {
+    width: 21vw;
+    height: width;
+  }
+} */
