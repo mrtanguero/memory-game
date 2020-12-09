@@ -2,31 +2,9 @@
 const game = document.querySelector(".game-container");
 const allBacksides = document.querySelectorAll(".card__side--back");
 
-const state = {
-  player: 0,
-  score: [0, 0],
-  movesPlayed: 0,
-  randomArray: [],
-  currentMove: [],
-  cardsOpen: [],
-};
+const state = {};
 
 // Kreira random niz duplih brojeva od 1-8
-const array = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
-for (let i = 0; i < 16; i++) {
-  state.randomArray.push(
-    array.splice(Math.floor(Math.random() * array.length), 1)[0]
-  );
-}
-
-// Postavljanje fotki i data-value atributa koje koristim za poređenje
-state.randomArray.forEach((num, ind) => {
-  const image = document.createElement("img");
-  image.src = `img/${num}.png`;
-  allBacksides[ind].textContent = "";
-  allBacksides[ind].append(image);
-  allBacksides[ind].parentElement.setAttribute("data-value", num);
-});
 
 function reactToMove(e) {
   const card = e.target.closest(".card");
@@ -67,6 +45,33 @@ function reactToMove(e) {
     }
   }
 }
+
+function init() {
+  state.player = 0;
+  state.score = [0, 0];
+  state.movesPlayed = 0;
+  state.randomArray = [];
+  state.currentMove = [];
+  state.cardsOpen = [];
+
+  const array = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+  for (let i = 0; i < 16; i++) {
+    state.randomArray.push(
+      array.splice(Math.floor(Math.random() * array.length), 1)[0]
+    );
+  }
+
+  // Postavljanje fotki i data-value atributa koje koristim za poređenje
+  state.randomArray.forEach((num, ind) => {
+    const image = document.createElement("img");
+    image.src = `img/${num}.png`;
+    allBacksides[ind].textContent = "";
+    allBacksides[ind].append(image);
+    allBacksides[ind].parentElement.setAttribute("data-value", num);
+  });
+}
+
+init();
 
 // Event listeners
 game.addEventListener("click", reactToMove);
