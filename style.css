@@ -92,10 +92,6 @@ h1 {
   z-index: -1;
 }
 
-/* .card:hover .card__side--front {
-  filter: brightness(1.2);
-} */
-
 .card.rotated .card__side--front {
   transform: rotateY(180deg);
 }
