@@ -2,6 +2,8 @@
 const game = document.querySelector(".game-container");
 const allCards = document.querySelectorAll(".card");
 const allBacksides = document.querySelectorAll(".card__side--back");
+const allFrontsides = document.querySelectorAll(".card__side--front");
+const overlay = document.querySelector(".overlay-container");
 
 const state = {};
 let timeout;
@@ -43,7 +45,7 @@ function resetMove() {
   });
 }
 
-function init() {
+function init(choice) {
   state.movesPlayed = 0;
   state.randomArray = [];
   state.currentMove = [];
@@ -60,15 +62,31 @@ function init() {
   // Postavljanje fotki po random nizu i data-value atributa koje koristim za
   // poređenje poslije
   state.randomArray.forEach((num, ind) => {
-    const image = document.createElement("img");
-    image.src = `img/${num}.png`;
-    allBacksides[ind].append(image);
+    const backImage = document.createElement("img");
+    backImage.src = `img/${choice}/${num}.png`;
+    allBacksides[ind].append(backImage);
     allBacksides[ind].parentElement.setAttribute("data-value", num);
+    const frontImage = document.createElement("img");
+    frontImage.src = `img/${choice}/logo.png`;
+    allFrontsides[ind].append(frontImage);
   });
+
+  game.addEventListener("click", reactToMove);
+}
+
+function startGame(e) {
+  const img = e.target.closest("img");
+  if (!img) return;
+
+  const choice = img.dataset.choice;
+  init(choice);
+  overlay.classList.add("hidden");
 }
 
 // On load
-init();
+// init(choice);
 
 // Event listeners
+
 game.addEventListener("click", reactToMove);
+overlay.addEventListener("click", startGame);
